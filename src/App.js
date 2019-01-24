@@ -20,15 +20,17 @@ class App extends Component {
     console.log(data);
   }
     places(){
-      return data.places.map(place=>{
+      return data.places.map(place=>{ //map transforma el arreglo en uno distinto
         return(
-          <card className="col-xs-12 col-sm-4">
-            <CardMedia>
-              <img src={place.imageUrl}/>
-            </CardMedia>
-            <CardTitle title={place.title}></CardTitle>
-            <CardText>{place.description}</CardText>
-          </card>
+          <div className="col-xs-12 col-sm-4">
+            <Card>
+              <CardMedia>
+                <img src={place.imageUrl}/>
+              </CardMedia>
+              <CardTitle title={place.title}></CardTitle>
+              <CardText>{place.description}</CardText>
+            </Card>
+          </div>
         );
       })
     }
@@ -96,7 +98,8 @@ class App extends Component {
 
           </div>
         </div>
-            <div style={{'backgroundColor': indigo400, 'padding': '50px'}}>
+            <div style={{'backgroundColor': indigo400, 'padding': '50px', color: 'white'}}>
+              <h3 style={{'fontSize': '30px'}}>Sitios populares</h3>
               <div className="row">
                 {this.places()}
               </div> 

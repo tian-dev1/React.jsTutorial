@@ -2,35 +2,39 @@
 import React from 'react';
 
 import RaisedButton from 'material-ui/RaisedButton';
-import { Card, CardText, CardMedia, CardTitle} from 'material-ui/Card';
-import {indigo400,redA400,lightBlue400,amberA400} from 'material-ui/styles/colors';
+import {indigo400} from 'material-ui/styles/colors';
+import TransitionGroup from 'react-transition-group/TransitionGroup';
 
 //Mis componentes
 import Title from '../components/Title';
+import Benefits from '../components/Benefits';
+import PlaceCard from '../components/places/PlaceCard';
 import data from '../requests/places';
 
 export default class Home extends React.Component{
 
+
+    constructor(props){
+        super(props);
+
+        this.state = {
+            places: data.places
+        }
+        this.hidePlace = this.hidePlace.bind(this);
+    }
     places(){
-        return data.places.map((place,index)=>{ //map transforma el arreglo en uno distinto
+        return this.state.places.map((place,index)=>{ //map transforma el arreglo en uno distinto
           return(
-            <div className="col-xs-12 col-sm-4" key={index}>
-              <Card>
-                <CardMedia>
-                  <img src={place.imageUrl}/>
-                </CardMedia>
-                <CardTitle title={place.title}></CardTitle>
-                <CardText>{place.description}</CardText>
-              </Card>
-            </div>
+            <PlaceCard onRemove={this.hidePlace} place={place} index={index} />
           );
         })
       }
 
-
-
-
-
+    hidePlace(place){
+        this.setState({
+            places: this.state.places.filter(el => el != place)
+        })
+    }
 
     render(){
         return(
@@ -43,55 +47,15 @@ export default class Home extends React.Component{
                             <img className="Header-illustration" src={'/images/imagen0.png'}></img>
                         </div>   
                         <div>
-                            <ul>
-                                <Card className="Header-Benefit">
-                                    <CardText>
-                                    <div className="row">
-                                        <div className="Header-Benefit-image" style={{'backgroundColor': redA400}}>
-                                        <img src={'/images/imagen1.png'}/>
-                                        </div>
-                                        <div className="Header-Benefit-content">
-                                        <h3>Califcaciones con emociones</h3>
-                                        <p>Califica tus lugares con experiencias, no con números</p>
-                                        </div>
-                                    </div>
-                                    </CardText>
-                                </Card>
-                                <Card className="Header-Benefit">
-                                    <CardText>
-                                    <div className="row">
-                                        <div className="Header-Benefit-image" style={{'backgroundColor': lightBlue400}}>
-                                        <img src={'/images/imagen2.png'}/>
-                                        </div>
-                                        <div className="Header-Benefit-content">
-                                        <h3>¿Sin internet? sin problemas</h3>
-                                        <p>Places funciona sin interner o en conexiones lentas</p>
-                                        </div>
-                                    </div>
-                                    </CardText>
-                                </Card>
-                                <Card className="Header-Benefit">
-                                    <CardText>
-                                    <div className="row">
-                                        <div className="Header-Benefit-image" style={{'backgroundColor': amberA400}}>
-                                        <img src={'/images/imagen3.png'}/>
-                                        </div>
-                                        <div className="Header-Benefit-content">
-                                        <h3>Tus lugares favoritos</h3>
-                                        <p>Define la lista de tus sitios favoritos</p>
-                                        </div>
-                                    </div>
-                                    </CardText>
-                                </Card>
-                            </ul>
+                           <Benefits/>
                         </div>
                     </div>
                 </div>
                 <div style={{'backgroundColor': indigo400, 'padding': '50px', color: 'white'}}>
                         <h3 style={{'fontSize': '30px'}}>Sitios populares</h3>
-                    <div className="row">
+                    <TransitionGroup className="row">
                         {this.places()}
-                    </div> 
+                    </TransitionGroup> 
                 </div>
             </section>
         )

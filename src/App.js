@@ -6,6 +6,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import data from './requests/places';
 import Home from './pages/Home';
 
+
 //Mis hojas de estilo
 import './App.css';
 
@@ -22,7 +23,8 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider>
-          <Home></Home>
+
+          <Home/>
       </MuiThemeProvider>
     );
   }

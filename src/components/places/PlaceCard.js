@@ -6,9 +6,10 @@ import CSSTransition from 'react-transition-group/CSSTransition';
 
 export default class PlaceCard extends React.Component{
 
+//Constructor que inicializa el estado de cada lugar de manera visible hasta que se le de clic al boton ocultar 
     constructor(props){
         super(props);
-        this.state ={
+        this.state = {
             show: true
         }
     }
@@ -17,8 +18,8 @@ export default class PlaceCard extends React.Component{
     render(){
         return(
             <CSSTransition
-            classNames='fade-scale'
-            in={this.props.in}
+                classNames='fade-scale'
+                in={this.props.in}
             >
                 <div className="col-xs-12 col-sm-4" key={this.props.index}>
                     <Card>
@@ -28,8 +29,8 @@ export default class PlaceCard extends React.Component{
                     <CardTitle title={this.props.place.title}></CardTitle>
                     <CardText>{this.props.place.description}</CardText>
                     <CardActions style={{'textAlign': 'right'}}>
-                        <FlatButton secondary={true} label="Ver más"></FlatButton>
-                        <FlatButton secondary={true} onClick={()=> this.props.onRemove(this.props.place)} label="Ocultar"></FlatButton>
+                        <FlatButton secondary={true} label="Ver más"/>
+                        <FlatButton secondary={true} onClick={()=> this.props.onRemove(this.props.place)} label="Ocultar"/>
                     </CardActions>
                     </Card>
                 </div>

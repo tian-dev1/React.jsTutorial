@@ -13,13 +13,15 @@ import data from '../requests/places';
 
 export default class Home extends React.Component{
 
-
+//Constructor que inicializa el estado del arreglo places
     constructor(props){
         super(props);
 
         this.state = {
-            places: data.places
+            places: []
         }
+        setTimeout(()=> this.setState({places: data.places}),1000)
+
         this.hidePlace = this.hidePlace.bind(this);
     }
     places(){
